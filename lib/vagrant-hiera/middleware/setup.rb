@@ -40,6 +40,7 @@ module VagrantHiera
 
       def create_symlink_to_hiera_config
         @env[:ui].info I18n.t('vagrant.plugins.hiera.middleware.setup.installing_hiera_config')
+        @env[:vm].channel.sudo("mkdir -p /etc/puppet")
         @env[:vm].channel.sudo("ln -fs #{@env[:vm].config.hiera.guest_config_path}/#{@env[:vm].config.hiera.config_file} /etc/puppet/hiera.yaml")
       end
     end
