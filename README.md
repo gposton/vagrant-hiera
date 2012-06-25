@@ -19,9 +19,10 @@ Or install it yourself as:
 ## Usage
 
 Add the following to your VagrantFile:
-      config.hiera.config_path = 'path/to/directory/that/contains/configuration'
-      config.hiera.config_file = 'hiera.yaml'
-      config.hiera.data_path   = '/path/to/hiera-data'
+
+    config.hiera.config_path = 'path/to/directory/that/contains/configuration'
+    config.hiera.config_file = 'hiera.yaml'
+    config.hiera.data_path   = '/path/to/hiera-data'
 
 `vagrant up`
 
