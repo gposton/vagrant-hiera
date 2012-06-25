@@ -16,11 +16,11 @@ module VagrantHiera
     end
 
     def config_path
-      File.absolute_path(@config_path)
+      File.expand_path(@config_path)
     end
 
     def data_path
-      File.absolute_path(@data_path)
+      File.expand_path(@data_path)
     end
 
     def set?
