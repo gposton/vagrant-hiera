@@ -18,11 +18,18 @@ Or install it yourself as:
 
 ## Usage
 
+Create a [hiera.yaml](https://github.com/puppetlabs/hiera-puppet#module-user) file on your host with the datadir pointing to `/tmp/vagrant-hiera/data`
+
+    :json:
+      :datadir: /var/lib/hiera
+
 Add the following to your VagrantFile:
 
-    config.hiera.config_path = 'path/to/directory/that/contains/configuration'
+    config.hiera.config_path = 'host/path/to/the/directory/that/contains/hiera.yaml'
     config.hiera.config_file = 'hiera.yaml'
-    config.hiera.data_path   = '/path/to/hiera-data'
+    config.hiera.data_path   = 'host/path/to/hiera-data'
+
+And then...
 
 `vagrant up`
 

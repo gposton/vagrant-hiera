@@ -8,11 +8,11 @@ module VagrantHiera
     attr_accessor :guest_data_path
 
     def guest_config_path
-      @guest_config_path.nil? ? (@guest_config_path = '/tmp/vagrant-hiera-config') : @guest_config_path
+      @guest_config_path.nil? ? (@guest_config_path = '/tmp/vagrant-hiera/config') : @guest_config_path
     end
 
     def guest_data_path
-      @guest_data_path.nil? ? (@guest_data_path = '/tmp/vagrant-hiera-data') : @guest_data_path
+      @guest_data_path.nil? ? (@guest_data_path = '/tmp/vagrant-hiera/data') : @guest_data_path
     end
 
     def config_path
@@ -31,9 +31,6 @@ module VagrantHiera
       config_file = File.join("#{config_path}", "#{config_file}")
       errors.add("#{File.new(config_file).absolute_path} does not exist.") unless File.exists? config_file
       errors.add("#{File.new(data_path).absolute_path} does not exist.") unless File.exists? "#{data_path}"
-      #global_config.vm.share_folder("vagrant-hiera-config", guest_config_path, config_path)
-      #global_config.vm.share_folder("vagrant-hiera-data", guest_data_path, data_path)
     end
-
   end
 end
