@@ -1,0 +1,12 @@
+en:
+  vagrant:
+    plugins:
+      hiera:
+        middleware:
+          prepare:
+            shared_folders: "Creating hiera shared folders metadata..."
+          setup:
+            hiera_installed: "puppet-hiera is installed"
+            installing_hiera: "Installing puppet-hiera"
+            installing_hiera_config: "Adding hiera config file"
+            shared_folders: "Adding hiera data folder"
