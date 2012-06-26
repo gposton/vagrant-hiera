@@ -10,7 +10,6 @@ module VagrantHiera
       def call(env)
         @env = env
         if @env[:vm].config.hiera.set?
-          @env[:vm].config.hiera.validate(@env, nil)
           install_puppet_hiera unless puppet_hiera_installed?
           create_shared_folders
           create_symlink_to_hiera_config

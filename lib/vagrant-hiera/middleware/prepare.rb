@@ -10,7 +10,6 @@ module VagrantHiera
       def call(env)
         @env = env
         if @env[:vm].config.hiera.set?
-          @env[:vm].config.hiera.validate(@env, nil)
           create_shared_folders
         end
         @app.call(env)
