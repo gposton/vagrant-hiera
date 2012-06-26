@@ -32,7 +32,7 @@ module VagrantHiera
       errors.add("Config file can not be empty") if config_file.empty?
       errors.add("Data path can not be empty") if data_path.empty?
       config = File.join("#{config_path}", "#{config_file}")
-      errors.add("#{config} does not exist.") unless File.exists?(config_file)
+      errors.add("#{config} does not exist.") unless File.exists?(config)
       errors.add("#{data_path} does not exist.") unless File.exists?("#{data_path}")
     end
   end
