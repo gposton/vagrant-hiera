@@ -1,6 +1,6 @@
 # Vagrant::Hiera
 
-TODO: Configures puppet-heira on your vagrant box
+Configures puppet-heira on your vagrant box
 
 ## Installation
 
