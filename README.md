@@ -33,6 +33,10 @@ And then...
 
 `vagrant up`
 
+Note: You will need to add/checkout [hiera-puppet]("https://github.com/puppetlabs/hiera-puppet" "Hiera Puppet") to your module path.  See the following links for more information:
+  https://github.com/puppetlabs/hiera-puppet#installation
+  https://groups.google.com/d/msg/puppet-users/IlPq14Rsnm0/UhbbRUsqqLgJ
+
 ## Contributing
 
 1. Fork it
