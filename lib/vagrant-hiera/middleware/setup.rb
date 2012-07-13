@@ -32,7 +32,7 @@ module VagrantHiera
 
       def install_hiera
         @env[:ui].warn I18n.t('vagrant.plugins.hiera.middleware.setup.install_hiera')
-        @env[:vm].channel.sudo("apt-get -y install hiera=#{@hiera_version}")
+        @env[:vm].channel.sudo("apt-get -y --force-yes install hiera=#{@hiera_version}")
       end
 
       def apt_repo_set?
@@ -44,7 +44,7 @@ module VagrantHiera
       def add_apt_repo
         @env[:ui].warn I18n.t('vagrant.plugins.hiera.middleware.setup.add_apt_repo')
         @env[:vm].channel.sudo("echo '#{@puppet_repo}' >> /etc/apt/sources.list")
-        @env[:vm].channel.sudo("apt-get -y update")
+        @env[:vm].channel.sudo("apt-get -y --force-yes update")
       end
 
       def puppet_installed?
@@ -55,8 +55,8 @@ module VagrantHiera
 
       def install_puppet
         @env[:ui].warn I18n.t('vagrant.plugins.hiera.middleware.setup.install_puppet')
-        @env[:vm].channel.sudo("apt-get -y install puppet-common=#{@puppet_version}")
-        @env[:vm].channel.sudo("apt-get -y install puppet=#{@puppet_version}")
+        @env[:vm].channel.sudo("apt-get -y --force-yes install puppet-common=#{@puppet_version}")
+        @env[:vm].channel.sudo("apt-get -y --force-yes install puppet=#{@puppet_version}")
       end
 
       def hiera_puppet_installed?
@@ -67,7 +67,7 @@ module VagrantHiera
 
       def install_hiera_puppet
         @env[:ui].warn I18n.t('vagrant.plugins.hiera.middleware.setup.install_hiera_puppet')
-        @env[:vm].channel.sudo("apt-get -y install hiera-puppet=#{@hiera_puppet_version}")
+        @env[:vm].channel.sudo("apt-get -y --force-yes install hiera-puppet=#{@hiera_puppet_version}")
       end
 
       def create_shared_folders
