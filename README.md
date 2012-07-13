@@ -20,7 +20,7 @@ Or install it yourself as:
 
 Create a [hiera.yaml](https://github.com/puppetlabs/hiera-puppet#module-user) file on your host with the datadir pointing to `/tmp/vagrant-hiera/data`
 
-    :json:
+    :yaml:
       :datadir: /var/lib/hiera
 
 Add the following to your VagrantFile:
