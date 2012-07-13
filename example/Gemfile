@@ -5,6 +5,3 @@ gem 'hiera'
 gem 'hiera-puppet'
 
 gem 'vagrant-vbguest'
-
-# Specify your gem's dependencies in vagrant-hiera.gemspec
-gemspec
