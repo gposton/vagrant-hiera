@@ -82,10 +82,10 @@ module VagrantHiera
       def create_symlink_to_hiera_config
         @env[:ui].info I18n.t('vagrant.plugins.hiera.middleware.setup.installing_hiera_config')
         @env[:vm].channel.sudo("mkdir -p /etc/puppet")
-        # This is where I think this file will end up once the official release is done
+        # This is where I think this file will end up once the official puppet v3 release is out
         @env[:vm].channel.sudo("ln -fs #{@env[:vm].config.hiera.guest_config_path}/#{@env[:vm].config.hiera.config_file} /etc/hiera.yaml")
-        # But this is where it seems to be looking for it now
-        # @env[:vm].channel.sudo("ln -fs #{@env[:vm].config.hiera.guest_config_path}/#{@env[:vm].config.hiera.config_file} /home/vagrant/.puppet/hiera.yaml")
+        # But this is where it looks for it now
+        @env[:vm].channel.sudo("ln -fs #{@env[:vm].config.hiera.guest_config_path}/#{@env[:vm].config.hiera.config_file} /etc/puppet/hiera.yaml")
       end
     end
   end

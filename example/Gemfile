@@ -5,3 +5,4 @@ gem 'hiera'
 gem 'hiera-puppet'
 
 gem 'vagrant-vbguest'
+gem 'vagrant-puppetconf'

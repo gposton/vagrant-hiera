@@ -9,6 +9,8 @@ Vagrant::Config.run do |config|
   config.hiera.config_file = 'hiera.yaml'
   config.hiera.data_path = './configuration'
 
+  config.puppetconf.updates = {'main/environment' => 'test'}
+
   config.vm.provision :puppet do |puppet|
     puppet.module_path = "./modules"
     puppet.manifests_path = "./manifests"
