@@ -17,7 +17,7 @@ module VagrantHiera
           add_apt_repo unless apt_repo_set?
           install_puppet unless puppet_installed?
           install_hiera unless hiera_installed?
-          install_puppet_hiera unless puppet_hiera_installed?
+          install_puppet_hiera unless hiera_puppet_installed?
           create_shared_folders
           create_symlink_to_hiera_config
         end
