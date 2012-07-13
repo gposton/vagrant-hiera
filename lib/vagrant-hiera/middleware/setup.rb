@@ -9,7 +9,7 @@ module VagrantHiera
         @puppet_version = '3.0.0-0.1rc3puppetlabs1'
         @hiera_puppet_version = '1.0.0-0.1rc1-1-g3e68ff0'
         @hiera_version = '1.0.0-0.1rc3'
-        @apt_opts = "#{@apt_opts} -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\""
+        @apt_opts = "-y --force-yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\""
       end
 
       def call(env)
