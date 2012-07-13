@@ -5,24 +5,23 @@ Vagrant::Config.run do |config|
   config.vm.box = "lucid32"
   config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
 
-  config.hiera.config_path = './configuration'
-  config.hiera.config_file = 'hiera.yaml'
-  config.hiera.data_path = './configuration'
+#  config.hiera.config_path = './configuration'
+#  config.hiera.config_file = 'hiera.yaml'
+#  config.hiera.data_path = './configuration'
 
-   config.vm.provision :puppet do |puppet|
-#     puppet.module_path = "/Users/gposton/src/trunk/provisioning/ubuntu/modules"
-     puppet.module_path = "./modules"
-     puppet.manifests_path = "./manifests"
-     puppet.manifest_file  = "base.pp"
-   end
-
-#  config.hiera.config_path = '/Users/gposton/src/trunk/configuration'
-#  config.hiera.config_file = 'vagrant-hiera.yaml'
-#  config.hiera.data_path = '/Users/gposton/src/trunk/configuration'
-#
 #   config.vm.provision :puppet do |puppet|
-#     puppet.module_path = "/Users/gposton/src/trunk/provisioning/ubuntu/modules"
-#     puppet.manifests_path = "/Users/gposton/src/trunk/provisioning/ubuntu/manifests"
+#     puppet.module_path = "./modules"
+#     puppet.manifests_path = "./manifests"
 #     puppet.manifest_file  = "base.pp"
 #   end
+
+   config.hiera.config_path = '/Users/gposton/src/trunk/configuration'
+   config.hiera.config_file = 'vagrant-hiera.yaml'
+   config.hiera.data_path = '/Users/gposton/src/trunk/configuration'
+
+   config.vm.provision :puppet do |puppet|
+     puppet.module_path = "/Users/gposton/src/trunk/provisioning/ubuntu/modules"
+     puppet.manifests_path = "/Users/gposton/src/trunk/provisioning/ubuntu/manifests"
+     puppet.manifest_file  = "base2.pp"
+   end
 end

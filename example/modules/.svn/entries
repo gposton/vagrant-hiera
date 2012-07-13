@@ -2,13 +2,13 @@
 
 dir
 1867
-svn+ssh://svn01.colo/provisioning/trunk/ubuntu/modules/stdlib
+svn+ssh://svn01.colo/provisioning/trunk/ubuntu/modules/puppetdashboard
 svn+ssh://svn01.colo/provisioning
 
 
 
-2012-06-20T21:53:51.076883Z
-1711
+2012-06-22T19:48:52.032815Z
+1790
 nhall
 
 
@@ -26,6 +26,15 @@ nhall
 
 56248164-2702-44e3-8289-0c7dae5ae4d4
 
-lib
+files
+dir
+
+tests
+dir
+
+manifests
+dir
+
+templates
 dir
 

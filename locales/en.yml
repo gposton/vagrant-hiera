@@ -6,7 +6,13 @@ en:
           prepare:
             shared_folders: "Creating hiera shared folders metadata..."
           setup:
-            hiera_installed: "puppet-hiera is installed"
-            installing_hiera: "Installing puppet-hiera"
+            hiera_installed: "hiera is installed"
+            install_hiera: "Installing hiera"
+            hiera_puppet_installed: "puppet-hiera is installed"
+            install_hiera_puppet: "Installing puppet-hiera"
+            apt_repo_set: "Puppet repo exists"
+            add_apt_repo: "Adding puppet repo"
+            puppet_installed: "puppet is installed"
+            install_puppet: "Installing puppet"
             installing_hiera_config: "Adding hiera config file"
             shared_folders: "Adding hiera data folder"
