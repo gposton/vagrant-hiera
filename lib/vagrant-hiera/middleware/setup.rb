@@ -9,6 +9,7 @@ module VagrantHiera
         @puppet_version = '3.0.0-0.1rc3puppetlabs1'
         @hiera_puppet_version = '1.0.0-0.1rc1-1-g3e68ff0'
         @hiera_version = '1.0.0-0.1rc3'
+        @apt_opts = "#{@apt_opts} -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\""
       end
 
       def call(env)
@@ -32,7 +33,7 @@ module VagrantHiera
 
       def install_hiera
         @env[:ui].warn I18n.t('vagrant.plugins.hiera.middleware.setup.install_hiera')
-        @env[:vm].channel.sudo("apt-get -y --force-yes install hiera=#{@hiera_version}")
+        @env[:vm].channel.sudo("apt-get #{@apt_opts} install hiera=#{@hiera_version}")
       end
 
       def apt_repo_set?
@@ -44,7 +45,7 @@ module VagrantHiera
       def add_apt_repo
         @env[:ui].warn I18n.t('vagrant.plugins.hiera.middleware.setup.add_apt_repo')
         @env[:vm].channel.sudo("echo '#{@puppet_repo}' >> /etc/apt/sources.list")
-        @env[:vm].channel.sudo("apt-get -y --force-yes update")
+        @env[:vm].channel.sudo("apt-get update")
       end
 
       def puppet_installed?
@@ -55,8 +56,8 @@ module VagrantHiera
 
       def install_puppet
         @env[:ui].warn I18n.t('vagrant.plugins.hiera.middleware.setup.install_puppet')
-        @env[:vm].channel.sudo("apt-get -y --force-yes install puppet-common=#{@puppet_version}")
-        @env[:vm].channel.sudo("apt-get -y --force-yes install puppet=#{@puppet_version}")
+        @env[:vm].channel.sudo("apt-get #{@apt_opts} install puppet-common=#{@puppet_version}")
+        @env[:vm].channel.sudo("apt-get #{@apt_opts} install puppet=#{@puppet_version}")
       end
 
       def hiera_puppet_installed?
@@ -67,7 +68,7 @@ module VagrantHiera
 
       def install_hiera_puppet
         @env[:ui].warn I18n.t('vagrant.plugins.hiera.middleware.setup.install_hiera_puppet')
-        @env[:vm].channel.sudo("apt-get -y --force-yes install hiera-puppet=#{@hiera_puppet_version}")
+        @env[:vm].channel.sudo("apt-get #{@apt_opts} install hiera-puppet=#{@hiera_puppet_version}")
       end
 
       def create_shared_folders
