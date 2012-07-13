@@ -85,7 +85,7 @@ module VagrantHiera
         # This is where I think this file will end up once the official release is done
         @env[:vm].channel.sudo("ln -fs #{@env[:vm].config.hiera.guest_config_path}/#{@env[:vm].config.hiera.config_file} /etc/hiera.yaml")
         # But this is where it seems to be looking for it now
-        @env[:vm].channel.sudo("ln -fs /etc/puppet/hiera.yaml /home/vagrant/.puppet/hiera.yaml")
+        # @env[:vm].channel.sudo("ln -fs #{@env[:vm].config.hiera.guest_config_path}/#{@env[:vm].config.hiera.config_file} /home/vagrant/.puppet/hiera.yaml")
       end
     end
   end
