@@ -16,11 +16,11 @@ module VagrantHiera
     end
 
     def config_path
-      File.expand_path(@config_path) rescue ''
+      File.expand_path(@config_path) rescue nil
     end
 
     def data_path
-      File.expand_path(@data_path) rescue ''
+      File.expand_path(@data_path) rescue nil
     end
 
     def set?
@@ -28,12 +28,12 @@ module VagrantHiera
     end
 
     def validate(env, errors)
-      errors.add("Config path can not be empty") if config_path.empty?
-      errors.add("Config file can not be empty") if config_file.empty?
-      errors.add("Data path can not be empty") if data_path.empty?
+      errors.add("Config path can not be empty.") if config_path.nil?
+      errors.add("Config file can not be empty.") if config_file.nil?
+      errors.add("Data path can not be empty.") if data_path.nil?
       config = File.join("#{config_path}", "#{config_file}")
-      errors.add("#{config} does not exist.") unless File.exists?(config)
-      errors.add("#{data_path} does not exist.") unless File.exists?("#{data_path}")
+      errors.add("Config file not found at '#{config}'.") unless File.exists?(config)
+      errors.add("Data directory not found at '#{data_path}'.") unless File.exists?("#{data_path}")
     end
   end
 end
