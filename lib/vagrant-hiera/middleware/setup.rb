@@ -6,8 +6,8 @@ module VagrantHiera
         opts = {
           :puppet_repo          => 'deb http://apt.puppetlabs.com/ lucid devel main',
           :puppet_version       => '3.0.0-0.1rc4puppetlabs1',
-          :hiera_puppet_version => '1.0.0-0.1rc1-1-g3e68ff0',
-          :hiera_version        => '1.0.0-0.1rc3',
+          :hiera_puppet_version => '1.0.0-0.1rc3',
+          :hiera_version        => '1.0.0-0.1rc4',
           :apt_opts             => "-y --force-yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\""
         }.merge(env[:vm].config.hiera || {})
 
