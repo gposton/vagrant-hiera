@@ -3,13 +3,22 @@ module VagrantHiera
 
     class Setup
       def initialize(app, env)
+        opts = {
+          :puppet_repo          => 'deb http://apt.puppetlabs.com/ lucid devel main',
+          :puppet_version       => '3.0.0-0.1rc4puppetlabs1',
+          :hiera_puppet_version => '1.0.0-0.1rc1-1-g3e68ff0',
+          :hiera_version        => '1.0.0-0.1rc3',
+          :apt_opts             => "-y --force-yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\""
+        }.merge(env[:vm].config.hiera || {})
+
         @app = app
         @env = env
-        @puppet_repo = 'deb http://apt.puppetlabs.com/ lucid devel main'
-        @puppet_version = '3.0.0-0.1rc4puppetlabs1'
-        @hiera_puppet_version = '1.0.0-0.1rc1-1-g3e68ff0'
-        @hiera_version = '1.0.0-0.1rc3'
-        @apt_opts = "-y --force-yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\""
+
+        @puppet_repo = opts[:puppet_repo]
+        @puppet_version = opts[:puppet_version]
+        @hiera_puppet_version = opts[:hiera_puppet_version]
+        @hiera_version = opts[:hiera_version]
+        @apt_opts = opts[:apt_opts]
       end
 
       def call(env)
