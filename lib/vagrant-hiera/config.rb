@@ -7,6 +7,12 @@ module VagrantHiera
     attr_accessor :data_path
     attr_accessor :guest_data_path
 
+    attr_accessor :puppet_repo
+    attr_accessor :puppet_version
+    attr_accessor :hiera_puppet_version
+    attr_accessor :hiera_version
+    attr_accessor :apt_opts
+
     def guest_config_path
       @guest_config_path.nil? ? (@guest_config_path = '/tmp/vagrant-hiera/config') : @guest_config_path
     end
