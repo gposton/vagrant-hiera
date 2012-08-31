@@ -5,7 +5,7 @@ module VagrantHiera
       def initialize(app, env)
         opts = {
           :puppet_repo          => 'deb http://apt.puppetlabs.com/ lucid devel main',
-          :puppet_version       => '3.0.0-0.1rc4puppetlabs1',
+          :puppet_version       => '3.0.0-0.1rc5puppetlabs1',
           :hiera_puppet_version => '1.0.0-0.1rc3',
           :hiera_version        => '1.0.0-0.1rc4',
           :apt_opts             => "-y --force-yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\""
