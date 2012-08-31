@@ -33,6 +33,12 @@ module VagrantHiera
       config_path || config_file || data_path
     end
 
+    def to_hash
+      hash = {}
+      instance_variables.each {|var| hash[var.to_s.delete("@")] = instance_variable_get(var) }
+      hash
+    end
+
     def validate(env, errors)
       errors.add("Config path can not be empty.") if config_path.nil?
       errors.add("Config file can not be empty.") if config_file.nil?

@@ -9,7 +9,7 @@ module VagrantHiera
           :hiera_puppet_version => '1.0.0-0.1rc3',
           :hiera_version        => '1.0.0-0.1rc4',
           :apt_opts             => "-y --force-yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\""
-        }.merge(env[:vm].config.hiera || {})
+        }.merge(env[:vm].config.hiera.to_hash || {})
 
         @app = app
         @env = env
