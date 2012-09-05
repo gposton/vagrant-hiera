@@ -33,9 +33,18 @@ And then...
 
 `vagrant up`
 
-**Note**: You will need to add/checkout [hiera-puppet]("https://github.com/puppetlabs/hiera-puppet" "Hiera Puppet") to your module path.  See the following links for more information:
+**Notes**: 
+You will need to add/checkout [hiera-puppet]("https://github.com/puppetlabs/hiera-puppet" "Hiera Puppet") to your module path.  See the following links for more information:
 - https://github.com/puppetlabs/hiera-puppet#installation
 - https://groups.google.com/d/msg/puppet-users/IlPq14Rsnm0/UhbbRUsqqLgJ
+
+I've only tested this plugin on puppet 3.  Thus, it will download and install puppet v3 (which as of now is a pre-release version).  Although it is not tested, if you would like to configure the plugin to use a different version of puppet, hiera, etc., you can do so by adding the following config to your Vagrantfile.
+
+```
+config.hiera.{puppet_repo, puppet_version, hiera_puppet_version, hiera_version, apt_opts} = ' ... '
+```
+
+Thanks to [haf]('http://github.com/haf') for the contribution.
 
 ## Contributing
 
@@ -46,8 +55,3 @@ And then...
 5. Create new Pull Request
 
 
-## Changing Sources:
-
-```
-config.hiera.{puppet_repo, puppet_version, hiera_puppet_version, hiera_version, apt_opts} = ' ... '
-```
