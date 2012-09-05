@@ -41,7 +41,7 @@ You will need to add/checkout [hiera-puppet]("https://github.com/puppetlabs/hier
 I've only tested this plugin on puppet 3.  Thus, it will download and install puppet v3 (which as of now is a pre-release version).  Although it is not tested, if you would like to configure the plugin to use a different version of puppet, hiera, etc., you can do so by adding the following config to your Vagrantfile.
 
 ```
-config.hiera.{puppet_repo, puppet_version, hiera_puppet_version, hiera_version, apt_opts} = ' ... '
+config.hiera.(puppet_apt_source|puppet_version|hiera_puppet_version|hiera_version|apt_opts) = ' ... '
 ```
 
 Thanks to [haf]('http://github.com/haf') for the contribution.
