@@ -3,13 +3,22 @@ module VagrantHiera
 
     class Setup
       def initialize(app, env)
+        opts = {
+          :puppet_repo          => 'deb http://apt.puppetlabs.com/ lucid devel main',
+          :puppet_version       => '3.0.0-0.1rc5puppetlabs1',
+          :hiera_puppet_version => '1.0.0-0.1rc3',
+          :hiera_version        => '1.0.0-0.1rc4',
+          :apt_opts             => "-y --force-yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\""
+        }.merge(env[:vm].config.hiera.to_hash || {})
+
         @app = app
         @env = env
-        @puppet_repo = 'deb http://apt.puppetlabs.com/ lucid devel main'
-        @puppet_version = '3.0.0-0.1rc5puppetlabs1'
-        @hiera_puppet_version = '1.0.0-0.1rc1-1-g3e68ff0'
-        @hiera_version = '1.0.0-0.1rc3'
-        @apt_opts = "-y --force-yes -o Dpkg::Options::=\"--force-confdef\" -o Dpkg::Options::=\"--force-confold\""
+
+        @puppet_repo = opts[:puppet_repo]
+        @puppet_version = opts[:puppet_version]
+        @hiera_puppet_version = opts[:hiera_puppet_version]
+        @hiera_version = opts[:hiera_version]
+        @apt_opts = opts[:apt_opts]
       end
 
       def call(env)
@@ -18,7 +27,7 @@ module VagrantHiera
           add_apt_repo unless apt_repo_set?
           install_puppet unless puppet_installed?
           install_hiera unless hiera_installed?
-          install_puppet_hiera unless hiera_puppet_installed?
+          install_hiera_puppet unless hiera_puppet_installed?
           create_shared_folders
           create_symlink_to_hiera_config
         end

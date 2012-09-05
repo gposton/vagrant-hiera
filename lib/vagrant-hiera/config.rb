@@ -7,6 +7,12 @@ module VagrantHiera
     attr_accessor :data_path
     attr_accessor :guest_data_path
 
+    attr_accessor :puppet_repo
+    attr_accessor :puppet_version
+    attr_accessor :hiera_puppet_version
+    attr_accessor :hiera_version
+    attr_accessor :apt_opts
+
     def guest_config_path
       @guest_config_path.nil? ? (@guest_config_path = '/tmp/vagrant-hiera/config') : @guest_config_path
     end
@@ -25,6 +31,12 @@ module VagrantHiera
 
     def set?
       config_path || config_file || data_path
+    end
+
+    def to_hash
+      hash = {}
+      instance_variables.each {|var| hash[var.to_s.delete("@")] = instance_variable_get(var) }
+      hash
     end
 
     def validate(env, errors)
