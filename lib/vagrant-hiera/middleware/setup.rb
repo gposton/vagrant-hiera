@@ -2,6 +2,8 @@ module VagrantHiera
   module Middleware
 
     class Setup
+      APT_SOURCE_FILE = '/etc/apt/sources.list.d/puppet.list'
+
       def initialize(app, env)
         @app = app
         @env = env
@@ -43,7 +45,8 @@ module VagrantHiera
       end
 
       def apt_repo_set?
-        setup = ( @env[:vm].channel.execute("grep '#{@puppet_apt_source}' /etc/apt/sources.list", :error_check => false) == 0 )
+        cmd = "test -f #{APT_SOURCE_FILE} && grep '#{@puppet_apt_source}' #{APT_SOURCE_FILE}"
+        setup = ( @env[:vm].channel.execute(cmd, :error_check => false) == 0 )
         @env[:ui].success I18n.t('vagrant.plugins.hiera.middleware.setup.apt_repo_set') if setup
         setup
       end
@@ -52,7 +55,7 @@ module VagrantHiera
         @env[:ui].warn I18n.t('vagrant.plugins.hiera.middleware.setup.add_apt_repo')
         @env[:vm].channel.sudo("wget http://apt.puppetlabs.com/puppetlabs-release-stable.deb")
         @env[:vm].channel.sudo("dpkg -i puppetlabs-release-stable.deb")
-        @env[:vm].channel.sudo("echo '#{@puppet_apt_source}' >> /etc/apt/sources.list.d/puppet.list")
+        @env[:vm].channel.sudo("echo '#{@puppet_apt_source}' >> #{APT_SOURCE_FILE}")
         @env[:vm].channel.sudo("apt-get update")
       end
 
