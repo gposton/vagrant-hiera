@@ -54,6 +54,8 @@ module VagrantHiera
     end
 
     def validate(env, errors)
+      return unless set?
+
       errors.add("Config path can not be empty.") if config_path.nil?
       errors.add("Config file can not be empty.") if config_file.nil?
       errors.add("Data path can not be empty.") if data_path.nil?
