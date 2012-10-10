@@ -8,6 +8,7 @@ module VagrantHiera
     attr_accessor :guest_data_path
 
     attr_accessor :puppet_apt_source
+    attr_accessor :apt_opts
     attr_accessor :puppet_version
     attr_accessor :hiera_puppet_version
     attr_accessor :hiera_version
@@ -21,7 +22,11 @@ module VagrantHiera
     end
 
     def puppet_apt_source
-      @puppet_apt_source.nil? ? (@puppet_apt_source = 'deb http://apt.puppetlabs.com/ lucid main') : @puppet_apt_source
+      @puppet_apt_source.nil? ? (@puppet_apt_source = 'deb http://apt.puppetlabs.com/ stable main') : @puppet_apt_source
+    end
+
+    def apt_opts
+      @apt_opts.nil? ? (@apt_opts = '-y --force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"') : @apt_opts
     end
 
     def puppet_version

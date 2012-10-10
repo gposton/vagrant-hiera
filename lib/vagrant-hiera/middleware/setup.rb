@@ -2,7 +2,7 @@ module VagrantHiera
   module Middleware
 
     class Setup
-      APT_SOURCE_FILE = '/etc/apt/sources.list.d/puppet.list'
+      APT_SOURCE_FILE = '/etc/apt/sources.list.d/puppetlabs.list'
 
       def initialize(app, env)
         @app = app
@@ -15,6 +15,7 @@ module VagrantHiera
         @config_file          = @env[:vm].config.hiera.config_file
         @puppet_version       = @env[:vm].config.hiera.puppet_version
         @puppet_apt_source    = @env[:vm].config.hiera.puppet_apt_source
+        @apt_opts             = @env[:vm].config.hiera.apt_opts
         @hiera_puppet_version = @env[:vm].config.hiera.hiera_puppet_version
         @hiera_version        = @env[:vm].config.hiera.hiera_version
       end
@@ -22,6 +23,7 @@ module VagrantHiera
       def call(env)
         @env = env
         if @env[:vm].config.hiera.set?
+          add_apt_repo unless apt_repo_set?
           install_puppet unless puppet_installed?
           install_hiera unless hiera_installed?
           if @env[:vm].config.hiera.install_puppet_heira?
