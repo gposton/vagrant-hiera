@@ -11,35 +11,24 @@ module VagrantHiera
         @config_path          = @env[:vm].config.hiera.config_path
         @data_path            = @env[:vm].config.hiera.data_path
         @config_file          = @env[:vm].config.hiera.config_file
-        @puppet_apt_source    = @env[:vm].config.hiera.puppet_apt_source
         @puppet_version       = @env[:vm].config.hiera.puppet_version
+        @puppet_apt_source    = @env[:vm].config.hiera.puppet_apt_source
         @hiera_puppet_version = @env[:vm].config.hiera.hiera_puppet_version
         @hiera_version        = @env[:vm].config.hiera.hiera_version
-        @apt_opts             = @env[:vm].config.hiera.apt_opts
       end
 
       def call(env)
         @env = env
         if @env[:vm].config.hiera.set?
-          add_apt_repo unless apt_repo_set?
           install_puppet unless puppet_installed?
           install_hiera unless hiera_installed?
-          install_hiera_puppet unless hiera_puppet_installed?
+          if @env[:vm].config.hiera.install_puppet_heira?
+            install_hiera_puppet unless hiera_puppet_installed?
+          end
           create_shared_folders
           create_symlink_to_hiera_config
         end
         @app.call(env)
-      end
-
-      def hiera_installed?
-        installed = ( @env[:vm].channel.execute("dpkg -l | grep puppet | grep #{@puppet_version}", :error_check => false) == 0 )
-        @env[:ui].success I18n.t('vagrant.plugins.hiera.middleware.setup.hiera_installed') if installed
-        installed
-      end
-
-      def install_hiera
-        @env[:ui].warn I18n.t('vagrant.plugins.hiera.middleware.setup.install_hiera')
-        @env[:vm].channel.sudo("apt-get #{@apt_opts} install hiera=#{@hiera_version}")
       end
 
       def apt_repo_set?
@@ -54,6 +43,17 @@ module VagrantHiera
         @env[:vm].channel.sudo("dpkg -i puppetlabs-release-stable.deb")
         @env[:vm].channel.sudo("echo '#{@puppet_apt_source}' >> /etc/apt/sources.list.d/puppet.list")
         @env[:vm].channel.sudo("apt-get update")
+      end
+
+      def hiera_installed?
+        installed = ( @env[:vm].channel.execute("dpkg -l | grep puppet | grep #{@puppet_version}", :error_check => false) == 0 )
+        @env[:ui].success I18n.t('vagrant.plugins.hiera.middleware.setup.hiera_installed') if installed
+        installed
+      end
+
+      def install_hiera
+        @env[:ui].warn I18n.t('vagrant.plugins.hiera.middleware.setup.install_hiera')
+        @env[:vm].channel.sudo("apt-get #{@apt_opts} install hiera=#{@hiera_version}")
       end
 
       def puppet_installed?
