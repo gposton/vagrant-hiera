@@ -14,6 +14,7 @@ module VagrantHiera
         @puppet_apt_source    = @env[:vm].config.hiera.puppet_apt_source
         @puppet_version       = @env[:vm].config.hiera.puppet_version
         @hiera_puppet_version = @env[:vm].config.hiera.hiera_puppet_version
+        @skip_hiera_puppet    = @env[:vm].config.hiera.skip_hiera_puppet?
         @hiera_version        = @env[:vm].config.hiera.hiera_version
         @apt_opts             = @env[:vm].config.hiera.apt_opts
       end
@@ -69,6 +70,7 @@ module VagrantHiera
       end
 
       def hiera_puppet_installed?
+        return true if @skip_hiera_puppet
         installed = ( @env[:vm].channel.execute("dpkg -l | grep hiera-puppet | grep #{@hiera_puppet_version}", :error_check => false) == 0 )
         @env[:ui].success I18n.t('vagrant.plugins.hiera.middleware.setup.hiera_puppet_installed') if installed
         installed

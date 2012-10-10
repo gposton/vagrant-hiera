@@ -33,6 +33,14 @@ module VagrantHiera
       @hiera_puppet_version.nil? ? (@hiera_puppet_version = '1.0.0-0.1rc3') : @hiera_puppet_version
     end
 
+    def skip_hiera_puppet!
+      @skip_hiera_puppet = true
+    end
+
+    def skip_hiera_puppet?
+      @skip_hiera_puppet
+    end
+
     def hiera_version
       @hiera_version.nil? ? (@hiera_version = '1.0.0-0.1rc4') : @hiera_version
     end
@@ -61,7 +69,7 @@ module VagrantHiera
       errors.add("Data path can not be empty.") if data_path.nil?
       errors.add("Puppet apt source can not be empty.") if puppet_apt_source.nil?
       errors.add("Puppet version path can not be empty.") if puppet_version.nil?
-      errors.add("Hiera puppet version path can not be empty.") if hiera_puppet_version.nil?
+      errors.add("Hiera puppet version path can not be empty.") if hiera_puppet_version.nil? && !@skip_hiera_puppet
       errors.add("Hiera version path can not be empty.") if hiera_version.nil?
       errors.add("Apt opts path can not be empty.") if apt_opts.nil?
       config = File.join("#{config_path}", "#{config_file}")
