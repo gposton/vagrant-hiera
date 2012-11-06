@@ -16,6 +16,14 @@ Or install it yourself as:
 
     $ gem install vagrant-hiera
 
+If you recieve this error:
+
+    /Applications/Vagrant/embedded/gems/gems/vagrant-1.0.5/lib/vagrant/config/top.rb:29:in `method_missing': undefined method `hiera' for #<Vagrant::Config::Top:0x00000100971a48> (NoMethodError)
+
+Try installing the gem using:
+
+    vagrant gem install vagrant-hiera
+
 ## Usage
 
 Create a [hiera.yaml](https://github.com/puppetlabs/hiera-puppet#module-user) file on your host with the datadir pointing to `/tmp/vagrant-hiera/data`
