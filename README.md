@@ -16,6 +16,10 @@ Or install it yourself as:
 
     $ gem install vagrant-hiera
 
+Add the following to your Vagrantfile:
+
+    require 'vagrant-hiera'
+
 If you recieve this [error](https://github.com/gposton/vagrant-hiera/issues/8):
 
     /Applications/Vagrant/embedded/gems/gems/vagrant-1.0.5/lib/vagrant/config/top.rb:29:in `method_missing': undefined method `hiera' for #<Vagrant::Config::Top:0x00000100971a48> (NoMethodError)
