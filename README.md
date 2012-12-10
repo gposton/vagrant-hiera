@@ -33,7 +33,7 @@ Try installing the gem using:
 Create a [hiera.yaml](https://github.com/puppetlabs/hiera-puppet#module-user) file on your host with the datadir pointing to `/tmp/vagrant-hiera/data`
 
     :yaml:
-      :datadir: /var/lib/hiera
+      :datadir: /tmp/vagrant-hiera/data
 
 Add the following to your VagrantFile:
 
